@@ -33,4 +33,11 @@ public class Configuration {
     public Executor getExecutor() {
         return new Executor(this);
     }
+
+    public PreparedStatementHandler getPreparedStatementHandler() {
+        return new PreparedStatementHandler(getParameterHandler());
+    }
+    public ParameterHandler getParameterHandler() {
+        return new ParameterHandler();
+    }
 }
