@@ -6,6 +6,7 @@ import com.cn.mebatis.parameter.BaseParameterHandler;
 import com.cn.mebatis.parameter.ParameterHandler;
 import com.cn.mebatis.plugin.Interceptor;
 import com.cn.mebatis.plugin.InterceptorChain;
+import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
@@ -20,9 +21,13 @@ public class Configuration {
 
     InterceptorChain interceptorChain = new InterceptorChain();
 
-
+    MysqlConnectionPoolDataSource dataSource;
     public Configuration() {
         // 可以在构造方法初始话需要的内容
+        dataSource = new MysqlConnectionPoolDataSource();
+        dataSource.setUrl(DATABASE_PROPERTIES.getString("url"));
+        dataSource.setUser(DATABASE_PROPERTIES.getString("user"));
+        dataSource.setPassword(DATABASE_PROPERTIES.getString("password"));
     }
 
     public void addInteceptor(Interceptor interceptor){
@@ -38,13 +43,12 @@ public class Configuration {
         return SQL_PROPERTIES.getString(statementId);
     }
     public Connection getConnection() {
-        Connection connection = null;
         try {
-            connection = DriverManager.getConnection(DATABASE_PROPERTIES.getString("url"), DATABASE_PROPERTIES.getString("user"), DATABASE_PROPERTIES.getString("password"));
+            return dataSource.getConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return connection;
+        return null;
     }
 
     public Executor getExecutor() {
