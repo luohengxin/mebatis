@@ -1,5 +1,9 @@
 package com.cn.mebatis;
 
+import com.cn.mebatis.parameter.ParameterHandler;
+import com.cn.mebatis.result.BaseResultSetHandler;
+import com.cn.mebatis.result.ResultSetHandler;
+
 import java.sql.*;
 import java.util.List;
 
@@ -31,7 +35,7 @@ public class PreparedStatementHandler {
         try {
 
             ResultSet resultSet = ps.executeQuery();
-            return new ResultSetHandler().handler(resultSet,clazz);
+            return new BaseResultSetHandler().handler(resultSet,clazz);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

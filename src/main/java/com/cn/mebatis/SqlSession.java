@@ -1,5 +1,7 @@
 package com.cn.mebatis;
 
+import com.cn.mebatis.executor.Executor;
+
 import java.util.List;
 
 public class SqlSession {
@@ -14,6 +16,7 @@ public class SqlSession {
 
     public <T> T selectOne(String statementId,Object[] param,Class clazz){
         String sql = configuration.getSql(statementId);
+
         List<T> query = executor.query(sql, param, clazz);
         if(query.size() == 0){
             return null;

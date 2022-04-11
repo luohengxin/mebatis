@@ -1,4 +1,4 @@
-package com.cn.mebatis;
+package com.cn.mebatis.result;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class ResultSetHandler {
+public class BaseResultSetHandler implements ResultSetHandler {
 
+    @Override
     public <T>  List<T>  handler(ResultSet resultSet, Class<T> clazz){
         List<T> res = new ArrayList<>();
         try {

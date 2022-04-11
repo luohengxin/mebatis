@@ -1,10 +1,11 @@
-package com.cn.mebatis;
+package com.cn.mebatis.parameter;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ParameterHandler {
+public class BaseParameterHandler implements ParameterHandler{
 
+    @Override
     public void handler(PreparedStatement ps ,Object[] param){
         try {
             for(int i = 0; i < param.length ;i++){
